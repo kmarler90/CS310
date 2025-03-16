@@ -1,0 +1,37 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+    double originalPrice, markupPercentage, salesTaxRate;
+    double sellingPrice, salesTax, finalPrice;
+
+    // Get user inputs
+    cout << "Enter the original price of the item: $";
+    cin >> originalPrice;
+    cout << "Enter the mark-up percentage: ";
+    cin >> markupPercentage;
+    cout << "Enter the sales tax rate: ";
+    cin >> salesTaxRate;
+
+    // Calculate selling price
+    sellingPrice = originalPrice + (originalPrice * markupPercentage / 100);
+
+    // Calculate sales tax
+    salesTax = sellingPrice * (salesTaxRate / 100);
+
+    // Calculate final price
+    finalPrice = sellingPrice + salesTax;
+
+    // Display results
+    cout << fixed << setprecision(2);
+    cout << "\nOriginal Price: $" << originalPrice << endl;
+    cout << "Mark-up Percentage: " << markupPercentage << "%" << endl;
+    cout << "Selling Price: $" << sellingPrice << endl;
+    cout << "Sales Tax Rate: " << salesTaxRate << "%" << endl;
+    cout << "Sales Tax: $" << salesTax << endl;
+    cout << "Final Price: $" << finalPrice << endl;
+
+    return 0;
+}
