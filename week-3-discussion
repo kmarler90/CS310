@@ -1,0 +1,32 @@
+Incorrect Comparison Operator:
+
+if (dayOfWeek = "Sunday")
+The single equal sign (=) is the assignment operator, not the comparison operator. This line assigns the string "Sunday" to the dayOfWeek variable, and then evaluates the result of the assignment, which will always be true.
+To compare strings for equality, you should use the double equal sign (==). The correct line should be: if (dayOfWeek == "Sunday").
+Incorrect Return Value:
+
+return O;
+The return value in the main function should be 0 (zero) to indicate successful program execution. The letter "O" is not a valid return value in this context.
+
+"fixed code"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string dayOfWeek;
+
+    // Input
+    cout << "Enter the day of the week (i.e Monday, Tuesday, etc.): ";
+    getline(cin, dayOfWeek); //get line is better for string input.
+
+    // Selection control
+    if (dayOfWeek == "Sunday") {
+        cout << "Weekly assignments are due today, better get to it!" << endl;
+    } else {
+        cout << "You still have time to complete your weekly assignments!" << endl;
+    }
+
+    return 0;
+}
