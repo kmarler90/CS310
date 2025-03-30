@@ -4,14 +4,14 @@ int main() {
   int x = 10;
   int y = 5;
 
-  if (x > y); { // Error 1: Semicolon after if condition
+  if (x > y); { 
     std::cout << "x is greater than y" << std::endl;
   } else {
     std::cout << "y is greater than or equal to x" << std::endl;
   }
 
   if (x == 10)
-    std::cout << "x is equal to 10"; // Error 2: Missing curly braces for multi-line if block
+    std::cout << "x is equal to 10"; 
     std::cout << "This line will always print";
 
   return 0;
