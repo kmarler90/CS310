@@ -1,21 +1,49 @@
-#include <iostream>
+//steps tracker per day.
 
-int main() {
-  int i = 0;
+#include <Iostream>
 
-  while (i < 5) {
-    std::cout << i << std::endl
-    i++; // Error 1: Missing semicolon
-  }
+using namespace ;
 
-  for (int j = 0; j < 3; j++) {
-    std::cout << j << std::endl;
-  j = 10; // Error 2: modifying loop counter inside loop
-  }
+int main()
+{
+	int stepWalkedDay1, stepWalkedDay2, stepWalkedDay3,
+		stepWalkedDay4, stepWalkedDay5, stepWalkedDay6,
+		stepWalkedDay7;
+	int stepWalkedInAWeek;
 
-  do {
-    std::cout << "This will run once." << std::endl;
-  } while (false);
+	cout << "Please enter the number of steps for day 1:";
+	cin >> stepWalkedDay1;
+	cout << endl;
 
-  return 0;
+	cout << "Please enter the number of steps for day 2:";
+	cin >> stepWalkedDay2;
+	cout << endl;
+
+	cout << "Please enter the number of steps for day 3:";
+	cin >> stepWalkedDay3;
+	cout << endl;
+
+	cout << "Please enter the number of steps for day 4:";
+	cin >> stepWalkedDay4;
+	cout << endl;
+
+	cout << "Please enter the number of steps for day 5:";
+	cin >> stepWalkedDay5;
+	cout << endl;
+
+	cout << "Please enter the number of steps for day 6:";
+	cin >> stepWalkedDay6;
+	cout << endl;
+	cout << "Please enter the number of steps for day 7:";
+	cin >> stepWalkedDay7;
+	cout << endl;
+
+	stepWalkedInAWeek = stepWalkedDay1 + stepWalkedDay2 + stepWalkedDay3
+					  + stepWalkedDay4 + stepWalkedDay5 + stepWalkedDay6
+					  + stepWalkedDay7;
+
+	cout << "Average number of steps every day: "
+		 << stepWalkedInAWeek / 7 << endl;
+
+	return 0;
 }
