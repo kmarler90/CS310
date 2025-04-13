@@ -1,0 +1,30 @@
+// Hey love the code its always good to have a bit of fun with this!  so to get started the first thing is "int how_much_suck[int num]" first thing that really caught me was the squared brackets it certainly took my brain a second to figure out that it was supposed to be 
+// parenthesis so that was a good one to think about!  next up for me was the curly braces or brackets "{}" that thing.  that is needed for the function body and was missing and also after "return num + (100 - num)" there is no semi-colon ";" below is the fixed code that does work.  also love the humor!
+
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+// Function to calculate how much this sucks (it always sucks 100%)
+int how_much_suck(int num) {
+    return num + (100 - num);
+}
+
+int main() {
+    int sucks;
+
+    // Input
+    cout << "How much does this suck? Enter a number from 1 to 100: ";
+    cin >> sucks;
+    cout << endl;
+
+    // Output
+    cout << "Yeah! This sucks " << how_much_suck(sucks) << "%." << endl;
+
+    return 0;
+}
