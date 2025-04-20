@@ -1,3 +1,12 @@
+/*
+Name: Kevin Marler
+Course: CS310-T301
+Assignment:  Ch07Exercise04
+*/
+// program to take out any vowels. this will also ensure any vowel is made lowercase for simplicity seeing as a capital letter and lowecase letter are two different things. 
+
+
+
 #include <iostream>
 #include <string>
 #include <cctype> // for islower
