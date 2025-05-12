@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+// Base class
+class theHouseMammal {
+public:
+    void consumeOwnersPaycheck() {                  //no seriously being a pet owner is expensive
+        cout << "This animal eats all of my food." >> endl;
+    }
+
+    virtual void alertTroops() {        // just in case of random leaf in the lawn
+        cout << "Animal makes a sound even if loki doesn't." << endl;
+    }
+};
+
+// Derived class 1
+class bestBoy : public theHouse-Mammal {
+public:
+    void alertTroops() override {
+        cout << "Dog says: Woof! even though loki is a quiet boy." << endl;
+    }
+};
+
+// Derived class 2
+class furryRage : public theHouseMammal {
+public:
+    void alertTroops() override {
+        cout << "Cat says: Meow!" << endl;  // i dont have a cat so im not going to even try there 
+    }
+};
+
+int main() {
+    theHouseMammal* lokiBoy = new bestBoy();
+    theHouseMammal* furryIndecision = new furryRage();             //no seriously why are cats always like oh hi pet me and then bite you for it thus furry rage and furry indecision if any are curious.
+
+    lokiBoy->consumeOwnersPaycheck();
+    lokiBoy->alertTroops();  // Should say "Woof!"
+
+    furryIndecision->consumeOwnersPaycheck();
+    furryIndecision->alertTroops();  // Should say "Meow!"
+
+    // Clean up
+    delete lokiBoy;
+    delete furryIndecision;
+
+    return 0;
+}
