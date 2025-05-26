@@ -1,0 +1,169 @@
+original
+//
+// Created by Randy Easton on 3/10/2025.
+//Revised on 05/21/2025 For Discussion Board 11
+//
+
+/*
+Source: chapter 3, programming exercise 7
+Interest on a credit card’s unpaid balance is calculated using the average daily balance.
+Write a program that accepts as input netBalance, payment, d1, d2, and interest rate per month. The program outputs the
+interest. Format your output to two decimal places and use a thousands separator for the dollar amounts.
+ */
+
+#include <iostream>
+#include <iomanip>
+#include <ios>
+
+using namespace std;
+
+
+template <T>
+T calc_interest(T calcADB, T interestRate) {
+  if (interestRate < 1){return calcADB * interestRate;}
+  else {return calcADB * interestRate/100;}
+}
+
+
+int main(){
+
+  //Variables
+  double dblNetbalance = 0;
+  double dblPayment = 0;
+  double dblBillCycleDays = 0; //D1
+  double dblPaymentDays = 0; //D2
+  double dblInterestRate = 0;
+
+
+  //Inputs
+  cout << "What is the Current Balance on your Bill?" << endl;
+  cin >> dblNetbalance;
+  cout << "How much did you pay on this month's Bill?" << endl;
+  cin >> dblPayment;
+  cout << "How many days are in your billing cycle?" << endl;
+  cin >> dblBillCycleDays; //D1
+  cout << "At the time you made the payment, How many days were left on the bill cycle" << endl;
+  cout << "ex: If you have 30 days in your cycle and you paid on the 22nd day Then you" << endl;
+  cout << "had/have 8 days left." << endl;
+  cin >> dblPaymentDays; //D2
+  cout << "What is the interest Rate?" << endl;
+  cin >> dblInterestRate;
+
+  //Calculations
+  double DisplayInterest = 0;
+  double calcAverageDailyBalance = (dblNetbalance*dblBillCycleDays - dblPayment*dblPaymentDays)/dblBillCycleDays;
+  DisplayInterest = calc_interest<string>(calcAverageDailyBalance, dblInterestRate);
+
+  //Output
+  if (locale().name() == "C" or locale().name() == "*") {
+    try{
+      //Credit: https://en.cppreference.com/w/cpp/locale/money_put
+      cout.precision(2);
+      std::cout.imbue(std::locale("en_US.UTF-8"));
+      //Credit. The above attempts to force the local from POSIX to the host system.
+      //Doesn't seem to work well tho :( This is the easier and preferred route.
+      //I think the problem is my IDE/Compiler (I use CLion by JetBrains).
+
+      std::cout << "The interest You paid was: " << std::showbase << std::put_money(DisplayInterest) << '\n';
+
+    }
+    catch (...) {
+      //Credit: https://www.daniweb.com/programming/software-development/threads/432889/currency-formatting
+      struct group_facet: public std::numpunct<char> {
+      protected:
+        string do_grouping() const { return "\003"; }
+      };
+      cout.imbue(locale(cout.getloc(), new group_facet));
+      //Credit
+
+      cout.precision(2);
+      cout << "The interest you paid was: $" << fixed << DisplayInterest << endl;
+    }
+  }
+
+}
+
+
+fixed with notes
+
+
+//
+// Created by Randy Easton on 3/10/2025.
+// Revised on 05/21/2025 For Discussion Board 11
+//
+
+/*
+Source: chapter 3, programming exercise 7
+Interest on a credit card’s unpaid balance is calculated using the average daily balance.
+Write a program that accepts as input netBalance, payment, d1, d2, and interest rate per month. The program outputs the
+interest. Format your output to two decimal places and use a thousands separator for the dollar amounts.
+ */
+
+#include <iostream>
+#include <iomanip>
+#include <locale>  // For std::locale and std::numpunct
+
+using namespace std;
+
+// FIX: Template declaration was incorrect. It should be template<typename T>
+template <typename T>
+T calc_interest(T calcADB, T interestRate) {
+    // FIX: Logic improved to handle both percentage and decimal interest rates
+    if (interestRate < 1)
+        return calcADB * interestRate;
+    else
+        return calcADB * (interestRate / 100.0);
+}
+
+int main() {
+    // Variables
+    double dblNetbalance = 0;
+    double dblPayment = 0;
+    double dblBillCycleDays = 0; // D1
+    double dblPaymentDays = 0;   // D2
+    double dblInterestRate = 0;
+
+    // Inputs
+    cout << "What is the current balance on your bill? ";
+    cin >> dblNetbalance;
+
+    cout << "How much did you pay on this month's bill? ";
+    cin >> dblPayment;
+
+    cout << "How many days are in your billing cycle? ";
+    cin >> dblBillCycleDays; // D1
+
+    cout << "How many days were left in the billing cycle when you made the payment? ";
+    cout << "(e.g., if you have 30 days in your cycle and paid on the 22nd day, you had 8 days left): ";
+    cin >> dblPaymentDays; // D2
+
+    cout << "What is the monthly interest rate (e.g., 1.5 for 1.5%)? ";
+    cin >> dblInterestRate;
+
+    // Calculations
+    double calcAverageDailyBalance = (dblNetbalance * dblBillCycleDays - dblPayment * dblPaymentDays) / dblBillCycleDays;
+
+    // FIX: You were incorrectly calling calc_interest<string>. This should be <double>
+    double DisplayInterest = calc_interest<double>(calcAverageDailyBalance, dblInterestRate);
+
+    // Output formatting
+    cout << fixed << setprecision(2);
+
+    try {
+        // Try setting US locale for thousands separator
+        cout.imbue(locale("en_US.UTF-8")); // May throw if not supported on the system
+        cout << "The interest you paid was: $" << DisplayInterest << endl;
+
+    } catch (...) {
+        // FIX: Fallback if locale setting fails
+        struct group_facet : public std::numpunct<char> {
+        protected:
+            string do_grouping() const override { return "\003"; } // Group digits by 3
+        };
+
+        cout.imbue(locale(cout.getloc(), new group_facet));
+        cout << "The interest you paid was: $" << DisplayInterest << endl;
+    }
+
+    return 0;
+}
